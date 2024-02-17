@@ -1,41 +1,60 @@
 package SE421;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class MessyCalc {
+    public static int x;
+    public static int y;
+    Scanner sc = new Scanner(System.in);
+    
     public static void main(String...args) {
         
-        int x = 0;
-        int y = 0;
-
-        ChooseNumbers(x, y);
-
+        MessyCalc obj = new MessyCalc();
+        
+        
+        int arrget[] = obj.GetNumbers(x, y);
+        
+        System.out.println("The first number is = "+arrget[0]);
+        System.err.println("The second number is = "+arrget[1]);
+                
         int arr[] = new int[80];
-        Addition(arr, x, y);
+        Addition(arr, arrget[0], arrget[1]);
+        printAddition(arrget[0], arrget[1]);
         arr = new int[80];
-        Multiplication(arr, x, y);
+        Multiplication(arr, arrget[0], arrget[1]);
+        printMultiplication(arrget[0], arrget[1]);
         arr = new int[80];
-        Subtraction(arr, x, y);
-        System.out.println(arr[7]);
+        Subtraction(arr, arrget[0], arrget[1]);
+        printSubtraction(arrget[0], arrget[1]);
 
     }
 
-    public static void ChooseNumbers(int x, int y) {
-        Scanner sc = new Scanner(System.in);
+    public int[] GetNumbers(int x, int y) {
+        int arrget[] = new int[2];
         System.out.println("Enter the first number = ");
-        int numberOne = sc.nextInt();
+        x = sc.nextInt();
         System.out.println("Enter the second number = ");
-        int numberTwo = sc.nextInt();
-        x = numberOne;
-        y = numberTwo;
-
-        System.out.println("Your numbers are : "+x+" and "+y);
+        y = sc.nextInt();
+        arrget[0] = x;
+        arrget[1] = y;
+        return arrget;
     }
+    
+
+
 
     public static void Addition(int arr[], int x, int y) {
         int index = 0;
         for (int i = 0; i < 20; i++) {
             arr[index++] = x+y;
+            
+        }
+    }
+
+    public static void printAddition(int x, int y) {
+        for (int i = 0; i < 20; i++) {
             System.out.println("Addition : "+(x+y));
+            
         }
     }
 
@@ -43,17 +62,33 @@ public class MessyCalc {
         int index = 0;
         for (int i = 0; i < 10; i++) {
             arr[index++] = x*y;
-            System.out.println("Multiplication : "+(x*y));
+            
         }
     }
+
+    public static void printMultiplication(int x, int y) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Multiplication : "+(x*y));
+            
+        }
+    }
+
 
     public static void Subtraction(int arr[], int x, int y) {
         int index = 0;
         for (int i = 0; i < 8; i++) {
             arr[index++] = x-y;
-            System.out.println("Subtraction : "+(x-y));
+            
         }
     }
+
+    public static void printSubtraction(int x, int y) {
+        for (int i = 0; i < 8; i++) {
+            System.out.println("Subtraction : "+(x-y));
+            
+        }
+    }
+
 
 
 

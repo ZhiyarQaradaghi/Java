@@ -53,6 +53,7 @@ public class SE421_Two {
             arr[index++] = i;
             System.out.println("odd number = "+i);
         }
+        
     }
 
     public static void printNumbersDivisibleBySix(int arr[]) {
@@ -62,6 +63,7 @@ public class SE421_Two {
             arr[index++] = i;
             System.out.println("divisible by 6 and between 100 and 200 = "+i);
         }
+        
 
     }
 }

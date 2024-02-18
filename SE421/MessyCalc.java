@@ -6,7 +6,6 @@ public class MessyCalc {
     public static int x;
     public static int y;
     Scanner sc = new Scanner(System.in);
-    
     public static void main(String...args) {
         
         MessyCalc obj = new MessyCalc();

@@ -13,10 +13,9 @@ public class SE421_Two {
         // Lab 1 part 2 == MAKE IT OVER ENGINEERED 
         
         int arr[] = new int[70];
-        int evenArray[] = new int[100];
+        
       // if you pass by reference and call it | 2 | 4 | 6 | 8 | 98 |
       // best method - REMEMBER TO RESET THE ARRAY !!
-        
         printEvenNumbers(arr);
         arr = new int[70];
       // Data will be corrupted  | 1 | 3 | ... | 98 |

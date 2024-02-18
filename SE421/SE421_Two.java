@@ -1,4 +1,7 @@
+
 package SE421;
+import java.util.*;
+
 public class SE421_Two {
     public static void main(String[] args) {
         // when you make a mistake, it is going to be so small and you wont realise it is feeding the complexity beast 
@@ -17,8 +20,26 @@ public class SE421_Two {
       // if you pass by reference and call it | 2 | 4 | 6 | 8 | 98 |
       // best method - REMEMBER TO RESET THE ARRAY !!
 
-        int[] evens = printEvens(); //passing by ref, caller doesnt have to remember 
-        int[] odds = printOddNumbers(); // as long as that index pointer is pointing at it, then java will not delete the data structure
+        int[] r = collectRange();
+        int start = r[0];
+        int end = r[1];
+
+        // solution 3
+        
+        findEvens(start,end); //passing by ref, caller doesnt have to remember 
+        findOddNumbers(); // as long as that index pointer is pointing at it, then java will not delete the data structure
+
+
+        // solution 2 
+        int arr[] = new int[70];
+
+        // in which situation are you going to prefer 2 over 3?
+        // solution 2 is more memory efficient, if you dont have alot of memory then solution 3 is bad
+        // if iam dealing with a language with no memory management like C, solution 3 is bad
+
+        // solution 3 is best for our example
+
+
        /**  printEvenNumbers(arr);
         arr = new int[70];
       // Data will be corrupted  | 1 | 3 | ... | 98 |
@@ -30,16 +51,40 @@ public class SE421_Two {
 
 
     }
+
+    public static int[] collectRange() {
+        int result[] = new int[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the start of the range");
+        result[0] = scanner.nextInt();
+        System.out.println("Enter the end of the range");
+        result[1] = scanner.nextInt();
+        
+        return result;
+
+    }
     // static int arr[] = new int[70]; easiest way but if this is production environment and you have 2 people at same time execute print odd and even and you want to add numbers to the array then you will corrupt the data
-    public static int[] printEvens() { // this line is code structure, passing array into () and calling it in main method is the worst method 
-        int arr[] = new int[70];
+    public static int[] findEvens(int start, int end) { // this line is code structure, passing array into () and calling it in main method is the worst method 
+        //my methods are shallow!
+        // my methods are deep
+        //1 functional req -- > 1 method
+        // if you can split that code then split it
+        
+        /**int [] r = collectRange(); // it is valid at run time s you cannot run this find even without invoking the collect range for the scanner, 2 methods are chained together, becareful with where you call it
+        int start = r[0];
+        int end = r[1];*/
+
+        int arr[] = new int[end];
         int index = 0;
-        for(int i = 0;i<=100;i++) {
+
+        for(int i = start;i<=end+1;i++) {
             if(i%2==0)
             arr[index++] = i;
             System.out.println("even number = "+i);
         }
-        return arr; // returning the reference
+        // returning the reference
+        
+        return arr;
     }
 
    /**  public static int findEvenNumbers(int[] evenArray) {
@@ -50,14 +95,23 @@ public class SE421_Two {
         }
     }*/
 
-    public static int[] printOddNumbers() {
-        int arr[] = new int[70];
+
+    public static int[] findOddNumbers() {
+
+        
+        int [] r = collectRange();
+        int start = r[0];
+        int end = r[1];
+
+        int arr[] = new int[end];
         int index = 0;
-        for(int i = 0;i<=100;i++) {
+
+        for(int i = start;i<=end+1;i++) {
             if(i%2!=0) // different ways: i%2==1 <-- slight confusing what is 1?, !i%2==0 <-- obscure but it will be better to use this when working with boolean operations
             arr[index++] = i;
             System.out.println("odd number = "+i);
         }
+        
         return arr;
         
     }

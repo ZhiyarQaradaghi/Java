@@ -2,27 +2,29 @@ package ITE409.Interface_chapter8;
 
 public class Interface {
     public static void main(String[] args) {
-        Faculty f1 = new Faculty(10);
+       /**  Faculty[] arr1 = new Faculty[100]; // create a new faculty object, then point at that faculty object
+        for (int i = 0; i < 100; i++) {
+            if(i<9) {
+                arr1[i] = new Faculty(i);
 
-        f1.setName("Ali");
-        f1.setSalary(1500);
+             }else{ 
+                arr1[i] = new Student();
+            }
+        }*/
+            // you can only access the coe that is shared between the interface and the class
+        Person test = new Person() {
+            public String getName() { // hey java create a pointer called test, create a class and make that class implement that pointer -- anonymous class
+                return "";
+            }
+            public void setName(String s) {
 
-        Student s1 = new Student();
-        s1.setName("Maya");
-
-        // poly morphism - the pointers have 1 data type, actual object is different data type, this works because there is a relationship between student and person, every student will implement all the methods of a person
-        Person p1 = new Student();
-        p1.setName("Tahir");
-
-       // this is same as above Person p1 = s1; // this pointer can point at any object can implement the Person interface
-        // ^^ p1 will point at exactly the same memory address that s1 is pointing at
-        // Person arg1 = s1;
+            }  // this class allows me to pass anything to print, after this scope the class will be eliminated
+        };
+        
         print(s1);
-        // Person arg1 = f1;
         print(f1);
-
-        // I can only use polymorphism  with classes that implement the interface, but if i add another method in the interface then
-        // i need to also add that method to all the classes that implement that interface
+        print(test);
+        
     }
 
     public static void print(Person arg1) {

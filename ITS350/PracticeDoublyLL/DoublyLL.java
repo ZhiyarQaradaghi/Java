@@ -17,14 +17,18 @@ public class DoublyLL {
     public static void main(String[] args) {
         DoublyLL obj1 = new DoublyLL();
 
+        obj1.insertFirst(5);
         obj1.insertFirst(0);
         obj1.insertFirst(1);
         obj1.insertFirst(1);
+        obj1.insertFirst(1);
         obj1.insertFirst(0);
+        obj1.insertFirst(5);
+       
         
         obj1.display();
 
-        obj1.insertAtPosition(1,2);
+        
 
         obj1.display();
         obj1.displayReverse();
@@ -36,18 +40,18 @@ public class DoublyLL {
         System.out.println("\nThe list is empty : "+obj1.checkListNull()+"\n");
     }
 
+
     public void insertFirst(int data) {
         Node newNode = new Node(data);
-
-        if (first == null) {
+        if (checkListNull()) {
             first = last = newNode;
         } else {
+            first.prev = newNode;
             newNode.next = first;
-            first.prev = newNode; // this only applies to doubly linked list because the prev will point at null if you dont assign the newNode to it
             first = newNode;
-        
-        } size++;
-        
+            
+        }
+        size++;
     }
 
     
@@ -103,32 +107,24 @@ public class DoublyLL {
         
     }
 
-    public void checkIfPalindrome() { // this is wrong, needs fixing
-        Node firstPointer = first;
-        Node lastPointer = first;
+    public void checkIfPalindrome() { 
+        Node firstPointer = first.next;
+        Node lastPointer = last;
 
-        while (lastPointer.next!=null) {
-            lastPointer = lastPointer.next;
+        lastPointer = lastPointer.prev;
         
-        while (true) {
-            
             if (firstPointer.data == lastPointer.data) {
+
                 firstPointer = firstPointer.next;
                 lastPointer = lastPointer.next;
-            } 
-            
-            if (firstPointer == lastPointer) {
-                System.out.println("List is palindrome");
-                return;
+                System.err.println("List is palindrome");
+
             } else {
                 System.err.println("List is not palindrome");
                 return;
             }
-
-        }
-    }
         
-    }
+        }
 
     public void deleteFirst() {
         if(first == null) {

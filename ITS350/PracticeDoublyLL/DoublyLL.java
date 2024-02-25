@@ -19,9 +19,9 @@ public class DoublyLL {
 
         obj1.insertFirst(5);
         obj1.insertFirst(0);
+        obj1.insertFirst(0);
         obj1.insertFirst(1);
-        obj1.insertFirst(1);
-        obj1.insertFirst(1);
+        obj1.insertFirst(0);
         obj1.insertFirst(0);
         obj1.insertFirst(5);
        
@@ -108,23 +108,27 @@ public class DoublyLL {
     }
 
     public void checkIfPalindrome() { 
-        Node firstPointer = first.next;
+        // Start from the first and the last nodes of the list
+        Node firstPointer = first;
         Node lastPointer = last;
-
-        lastPointer = lastPointer.prev;
-        
+    
+        // Loop until the pointers meet or cross each other
+        while (firstPointer != null && lastPointer != null) {
+            // Compare the data of the nodes
             if (firstPointer.data == lastPointer.data) {
-
+                // Move the pointers to the next and the previous nodes
                 firstPointer = firstPointer.next;
-                lastPointer = lastPointer.next;
-                System.err.println("List is palindrome");
-
+                lastPointer = lastPointer.prev;
             } else {
+                // The data is not equal, the list is not a palindrome
                 System.err.println("List is not palindrome");
                 return;
             }
-        
         }
+        // The loop ended without returning false, the list is a palindrome
+        System.out.println("List is palindrome");
+    }
+    
 
     public void deleteFirst() {
         if(first == null) {

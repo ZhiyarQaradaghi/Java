@@ -9,4 +9,8 @@ public class Student implements Person { // the student will implement every sin
     public void setName(String name) {
         studentName = name;
     }
+
+    public void print() {
+        System.out.println("Student name "+studentName);
+    }
 }

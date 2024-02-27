@@ -1,14 +1,12 @@
 package ITE409.Interface_chapter8;
 
-public class Faculty implements Person { 
-    private final int id; // if you put keyword final, means i can only use = on this variable only once
+public class Faculty implements Person { // Faculty is a ---> Person
+    private final int id = 0; // if you put keyword final, means i can only use = on this variable only once
     private String name;
     private int salary;
 
 
-    public Faculty(int id) {
-        this.id = id;
-    }
+   
 
     public int getId() {
         return id;
@@ -33,6 +31,11 @@ public class Faculty implements Person {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public void print() {
+        System.out.println(name);
+        System.out.println(salary);
     }
 
 }

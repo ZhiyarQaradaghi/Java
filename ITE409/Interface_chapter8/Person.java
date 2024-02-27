@@ -11,5 +11,6 @@ public interface Person { // interface is like an adjective, provides a classifi
      // ^^ every person should have setName and getName
 
      // limitation, you can only access methods that exist in Person interface
+     public void print();
 
 }

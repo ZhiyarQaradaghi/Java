@@ -2,29 +2,24 @@ package ITE409.Interface_chapter8;
 
 public class Interface {
     public static void main(String[] args) {
-       /**  Faculty[] arr1 = new Faculty[100]; // create a new faculty object, then point at that faculty object
-        for (int i = 0; i < 100; i++) {
-            if(i<9) {
-                arr1[i] = new Faculty(i);
-
-             }else{ 
-                arr1[i] = new Student();
-            }
-        }*/
-            // you can only access the coe that is shared between the interface and the class
-        Person test = new Person() {
-            public String getName() { // hey java create a pointer called test, create a class and make that class implement that pointer -- anonymous class
-                return "";
-            }
-            public void setName(String s) {
-
-            }  // this class allows me to pass anything to print, after this scope the class will be eliminated
-        };
+      Faculty f1 = new Faculty(); // <-- non polymorphic code
+      Person f2 = new Faculty(); // <--- polymorphic code, the data type of the pointer is different from the data type of the actual object (memory space)
+      //Person f3 = new Scanner(System.in); // trying to have an object with scanner and point it at interface person, but this wont work because there is no relationship between scanner class and interface
+    
+      // Anonymous class
+      Person f3 = new Person() { // java on the fly, create a class, make this class implement person interface, then create an object from it and make f3 with data type person pointing at this object
         
-        print(s1);
-        print(f1);
-        print(test);
-        
+        public String getName() {
+            return "kaka hama";
+        }
+        public void setName(String s1) {
+
+        }
+      };
+
+      f3.setName("John");
+      System.out.println(f3.getName());
+
     }
 
     public static void print(Person arg1) {

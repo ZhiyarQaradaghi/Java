@@ -13,9 +13,7 @@ public class Student extends AUISMember {
      * 
      */
 
-     public void print() {
-        System.out.println(this.getName());
-     }
+     
 
      private float gpa;
      public void setGPA(float gpa) {
@@ -24,6 +22,14 @@ public class Student extends AUISMember {
 
      public float getGPA() {
         return this.gpa;
+     }
+
+     public void print() {
+        System.out.println(this.getName());
+     }
+
+     public String toString() { // this is called overriding, we are redefining the method in the sub class
+        return "Student ID" + getId() + " Name " + getName() + " GPA " + getGPA();
      }
 
      

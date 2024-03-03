@@ -27,10 +27,11 @@ public class Student extends AUISMember {
      public void print() {
         System.out.println(this.getName());
      }
-
+     @Override // annotation, meta deta - help the compiler , but it is not required, asking compiler that i am overriding stuff not introducing a new method
      public String toString() { // this is called overriding, we are redefining the method in the sub class
-        return "Student ID" + getId() + " Name " + getName() + " GPA " + getGPA();
+        return "Student ID : " + getId() + " Name : " + getName() + " GPA : " + getGPA();
      }
+     
 
      
     

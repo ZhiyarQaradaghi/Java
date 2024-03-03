@@ -33,6 +33,10 @@ public class Student extends AUISMember {
       return -1;
      }
 
+     public static String test() {
+      return "From Student Class";
+     }
+
      @Override
      public void setId(int i) { // removing the implementation of this method by overriding
       // overriding is used to change or throw away implementation

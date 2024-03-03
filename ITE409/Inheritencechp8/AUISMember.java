@@ -9,6 +9,10 @@ public class AUISMember extends Person {
         this.id = id;
     }
 
+    public static String test() {
+        return "From AUISMEMBER Class";
+       }
+
     public int getId() {
         return this.id;
     }

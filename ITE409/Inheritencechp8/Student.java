@@ -13,7 +13,14 @@ public class Student extends AUISMember {
      * 
      */
 
-     
+   //   public Student() {
+   //       //super(10); // working with constructor in the SUPER class
+   //       // One of the constructor of the super class will always be called when you are creating object from sub class
+   //       // java will create Student(){super();}
+   //      // working with constructor in this class this(10); 
+   //       // KEYWORD SUPER MUST BE THE FIRST LINE
+   //      setGPA(gpa);
+   //   }
 
      private float gpa;
      public void setGPA(float gpa) {
@@ -35,6 +42,10 @@ public class Student extends AUISMember {
 
      public static String test() {
       return "From Student Class";
+     }
+
+     public String getDept() {
+      return "ENG";
      }
 
      @Override

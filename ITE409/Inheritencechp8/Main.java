@@ -1,15 +1,15 @@
 package ITE409.Inheritencechp8;
 import java.util.*;
 
-import ITE409.Interface_chapter8.AUIS;
-
 public class Main {
     public static void main(String[] args) {
-        Student s2 = new Student(); // you can access getname setname getid setid getgpa setgpa
-        System.out.println(s2.test());
+        //Student s1 = new Student(); // you can access getname setname getid setid getgpa setgpa
+        AUISMember f1 = new Faculty();
+        Faculty f2 = new Faculty(); // whats the key difference? If you have a method and its declared in faculty only then
+        // then polymorphic code wont see it
 
-        AUISMember s3 = new Student();
-        System.out.println(s3.test());// STATIC methods cannot be overriden, this is the reason why static sucks - static methods is only depends on the pointer not the object itself
+        //System.out.println(f1.getDept()); // the moment a method implements an abstract method then it wont take another
+        System.out.println(f2.getDept());
     }
     
 }

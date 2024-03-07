@@ -18,7 +18,12 @@ package ITE409.Exception;
 public class Main {
     public static void main(String[] args) {
         System.out.println("main");
-        method1();
+        try {
+            method1();
+        } catch (Exception ex) {
+            System.out.println("New ball caught");
+        }
+        
         System.out.println("-------------");
         method3();
     }
@@ -39,30 +44,8 @@ public class Main {
     public static void method2() {
 
         System.out.println("method 2 start");
-        String s = null;
-        s.toString();
-        // try { // execute this block of code, and if there is a problem then catch it -- the moment the exception ball is thrown then I will catch it
-        //     s = null;
-        //     System.out.println(s.toString());
-        // }  catch(NullPointerException ex) {
-        //     // if i have nullpointerexception, then this block will execute, if not then run the next block
-        //     // having multiple catch is normal, for ex if database connection failed and multiple other stuff so you need multiple catch
-        //     s = " ";
-        //     System.out.println(s.toString());
-        // }
         
-        //     catch(RuntimeException ex) { // if you find this error, then catch it for me and give it to me then I will give a pointer to the object NullPointerException
-        //     // the ex pointer helps us call the methods inherited by NullPointerException
-        //     // if i change the catch to RuntimeException, then i can catch all exceptions that are runtime exceptions and any of its subclasses including NUllPOINTERexception
-        //     // this is polymorphism as nullpointer exception is a subclass of runtimeexception and now you can catch all exceptions of runtime and its subclasses
-
-            
-        //     System.out.println("We have a problem");
-        //     // System.out.println(ex.getMessage()); // print the exact message of the exception
-        // } catch(Exception ex) { // will catch ALL errors in java, because exception is a super class of all exceptions
-        //     s = "";
-        // } finally { // a block of code that will execute no matter what, if there is exception or not -- doesnt matter
-        //      System.out.println(s.toString());
+        throw new RuntimeException();// created an exception on the fly, throw the ball so somebody will catch it -- here method 2 throws it
         System.out.println("method 2 end");
         }
         

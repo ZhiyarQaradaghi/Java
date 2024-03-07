@@ -14,60 +14,26 @@ package ITE409.Exception;
  * 
  * Every exception that you would like to create needs to be subclass of Runtimeexception
  * 
+ * When you throw an exception, the execution will stop and the exception ball will keep being passed to all callers until someone catches it or if nothing catches it then it stops when reaches main
+ * 
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("main");
+        Student s= new Student();
+        
+        s.setGpa(3);
+        System.out.println(s.getGpa());
+
+        // our exception will be thrown
         try {
-            method1();
-        } catch (Exception ex) {
-            System.out.println("New ball caught");
+            s.setGpa(-3); // if he tries to do this, then our original value will remain
+        } catch (StudentException ex) {
+            System.out.println(s.getGpa());
+            
         }
-        
-        System.out.println("-------------");
-        method3();
-    }
-
-    public static void method1() {
-        System.out.println("method1 start");
-        
-        // NullPointerExeption -- it happens when you are using a pointer that is not pointing at an object
-        // IndexOutOfBound Exeption -- happens when you go out of an array's length
-        try { // catching exception from another method
-            method2();
-        } catch (NullPointerException ex) {
-            System.out.println("Something went wrong");
-        }
-        System.out.println("method 1 end");
-    }
-
-    public static void method2() {
-
-        System.out.println("method 2 start");
-        
-        throw new RuntimeException();// created an exception on the fly, throw the ball so somebody will catch it -- here method 2 throws it
-        System.out.println("method 2 end");
-        }
-        
-        
-
-    
+        // s.setGpa(-2);
+        // System.out.println(s.getGpa());
 
 
-    // ASIACELL interview question : what is the output?
-
-    public static void method3() {
-        System.out.println("method 3 start");
-        String s;
-        try{
-            s="";
-            s.toString();
-            return;
-        } catch(NullPointerException ex) {
-            s = "";
-        } finally {
-            System.out.println("finally");
-        }
-        System.out.println("method 3 end");
     }
 }

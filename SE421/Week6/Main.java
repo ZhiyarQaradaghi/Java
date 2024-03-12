@@ -7,47 +7,22 @@ public class Main {
         s1.setId(0);
         s1.setName("Sarah");
         
-        print(s1.getId(), s1.getName()); // not your responsibility to extract, you could use the custom datatype Student
-        // whenever you have a custom data type, use it as a datatype
-        // pass by value
+        Student[] arr1 = new Student[100];
+        for (int i = 0; i < arr1.length; i++) {
+            Student s = new Student();
+            s.setId(10000+i);
+            arr1[i] = s; // multi dimentional array, holds multiple stuff (id, gpa ...)
+            // if you use arrays normally then you need to create arr[][][][] or 4 arrays 
+            // i want to give some other program this array by pass by value not reference - i dont want them to touch the array
 
-        print(s1); // just need s - object pointer
-        // pass by reference
+        }
 
-        // side effect of custom data type
-        // 
+        Student[] arr2 = new Student[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
 
-        // which print is better??
-
-        // imagine we do not have gpa, 2 days from now, we decided to add a gpa - how many changes do we need to do in order to implement gpa?
-        // when you are using student as arg, you are passing all the responsibity of that student class as an argument
-        // the caller of print does not require any modification, because the object pointer is enough to pass as a parameter (argument)
-        // even if i had multiple more responsibilities, the signature doesnt change
-
-        // Student s2 = new Student();
-        // s2.setName(s1.getName());
-        // s2.setId(s1.getId());
-        // not practical, because if we have another variable then we have to enter it here as well - propagates
-
-// do this 
-
-        print(new Student(s1)); // i dont need to guess the name of the method / have a constructor in order to pass data by value if you deal with custom data type
-
-        Student s2 = new Student();
-        s2.copy(s1);
-        print(s2);
-
-        print(s1.duplicate()); // passing by value
-
-        print(s1);
-
-        System.out.println(s1.getName()); 
-
-        // can we hack such that we pass custom data type is passing by value
-        // #1 java wont allow it by default
-        // can we make it so that when we print s.getName return Sarah no matter what print method resets
-
-
+            arr2[i] = new Student(arr1[i]);// new object, copy whatever arr1 is pointing at
+            // copied from arr1 into a seperate object, and arr2 points at it
+        }
 
     }
 

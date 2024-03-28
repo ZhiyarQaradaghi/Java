@@ -4,82 +4,60 @@ import java.io.*;
 public class main {
     public static void main(String[] args) {
         try {
-            // byte b = 100;
+            // filterinputstream filteroutputstream -- *** topic
 
-            // // dont use FileWriter because this will convert it to String and read it as  3 bytes - 1 for each char - and will have to convert it back to byte
-            // // O(n)
 
-            // // os.write(b); // write it directly as binary without converting to string
-            // // os.close();
 
-            // byte b = (byte) in.read();
-            
-            // System.out.println(b);
-            // in.close();
+            OutputStream os = new FileOutputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
+            BufferedOutputStream bos = new BufferedOutputStream(os, 4096); // 4096 = 1024*4 1 kb x 4
+            // we are combining the write operations and do it once before doing it one by one since thats not cheap
+            // bufferedoutputstream is really good with sending tcp messages/ instead of sending byte by bye and having spike in traffic, it will send it all at once in one packet
 
-            // // best solution to reading and writing binary data compared to InputSreamReader and OutputStreamWriter which take too much resources and time
-            // OutputStream os = new FileOutputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
-            // DataOutputStream dos = new DataOutputStream(os);
-            // int x = 1000000; // 1 int -> 4 bytes
-            // dos.writeInt(x); // writes int as binary data
-            // InputStream in = new FileInputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
-            // DataInputStream din = new DataInputStream(in);
-            // System.out.println(din.readInt()); // reads binary data as integer
-            // // If you use dataoutputstream then you MUST use datainputstream to read the data
-            
-            // Student s = new Student(1, "Maya", 3,2f); // this is what office does when saving your file
-            // s.name = new Dept();
-            // s.dept.deptname = "Computing and Info."
-            // OutputStream os = new FileOutputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
-            // DataOutputStream dos = new DataOutputStream(os);
-            // dos.writeInt(s.id);
-            // dos.writeUTF(s.name);
-            // dos.writeFloat(s.gpa);
-            // dos.close(); // the problem with this : NOT PRACTICAL
-            // // Sometimes you have more complex object
+            //chrome and firefox read based on scrolling, if its 2gb of data then they only load like 10% of it until you scroll to a certain part
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            User u = new User();
+            u.setUsername("User123");
+            u.setPassword("pass123"); 
+            oos.writeObject(u);
 
-            // more practical solution
-            // Student s = new Student(1, "Maya", 3.2f);
-            // s.dept = new Dept();
-            // s.dept.name = "Computing and Info.";
-            // OutputStream os = new FileOutputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
-            // ObjectOutputStream oos = new ObjectOutputStream(os);
+            // which to use
+            bos.flush(); // memory is stored 
+            oos.close(); // if computer crashes, then data will be lost
+        
+        } catch (Exception ex) {
 
-            // oos.writeObject(s);
-            // oos.close();
-            // reading part
-            InputStream in = new FileInputStream("C:\\Users\\zhiya\\OneDrive\\Documents\\Studies\\Java\\ITE409\\JAVAIO\\ite409.txt");
-            ObjectInputStream ois = new ObjectInputStream(in);
-
-            Object o = ois.readObject();
-
-            if (o instanceof Student) {
-                Student s = (Student) o;
-                System.out.println(s.name);
-                System.out.println(s.id);
-
-            }
-
-        } catch (Exception e) {
-            System.err.println(e);
         }
+
     }
 }
 
-class Dept implements Serializable {
-    String name;
-}
 
-// example if we have objects in our application
-class Student implements Serializable { // needs to implements serializable if you use ObjectOUtputStream
-    public int id;
-    public String name;
-    public float gpa;
-    public Dept dept;
 
-    public Student(int id, String name, float gpa) {
-        this.id = id;
-        this.name = name;
-        this.gpa = gpa;
+class User implements Serializable { // when we serialize a variable, even a private one, it still is in that memory and can be read
+    // when we send this object User to java io and output it to a file then we make a change in User and then the file is inputted back to our User object, data will be corrupted because the original User is changed
+    //solution to above problem:
+    private static final long serialVersionUID = 10000l; // when you serialize the original object, this var will be stored in the file, so if you make any changes then change the serialVersionUID as well
+    // write this everytime when you have serializable, if you change anything in the class then change the value of this too
+
+    private String username;    
+    // transient in context of serializable it means ignore this variable and dont serialize it
+    private transient String password;
+
+    public String getPassword() {
+        return password;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
 }

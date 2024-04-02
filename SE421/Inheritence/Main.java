@@ -1,77 +1,121 @@
 package SE421.Inheritence;
 
 public class Main {
+    //problems with inheritence:
+    // 1. Tightly coupledness, 2. Code Duplication
+    // Can be used for one thing only -- OVERRRIDING
+    // To solve these problems, we will mimic inheritence with interface and a set of classes
+
     public static void main(String[] args) {
-        // A o1 = new A();
-        // A o2 = new A();
+        // I obj = new A(new P(){
+        //     @Override
+        //     public void method1() {
+        //         System.out.println("AUIS");                
+        //     }
+        // });
 
-        // o1.x = 2024;
-        // o2.x = 2025; 
+        // obj.method1();
 
-        B o1 = new B();
-        B o2 = new B();
+        // I obj2 = new A(new P());
 
-        o1.y = 2024;
-        o2.y = 2024;
+        // obj2.method1();
 
-        // System.out.println(o1 == o2); // are pointer o1 and pointer o2 pointing at the same memory space? False
+        I obj2 = new A();
+        obj2.setParent(new C);
 
-        System.out.println(o1.equals(o2));        
-        
+        // block of code and after one hour
 
-    }        
-}
+        // i want to change the parent of the object constructed
 
-class A { // if we have final with a class then there will be no inheritence with the class
-    // private int x = 2024;
-    // // protected -- acts like public for subclasses, private for non sub class
-    
-    // @Override
-    // protected void finalize() { // destructor - used when
-    //     System.out.println("OBJECT is deleted");
-    // } 
-    
-    // public final void method1() { // if used with final, this method cannot be overriden by subclasses
-    //     System.out.println("Method1 "+this.x);
-    public int x;
-    @Override
-    public boolean equals(Object other) {
-        boolean result = this == other;
-        if (result) 
-            return true;
-        result = super.equals(other);
 
-        if (other instanceof A) { // if other is pointing at an Object of A
-            A p = (A)other;        
-            result = result && (this.x == p.x);
-            return true;                        
-        }
-        // result = result || (this.x == other.x);
-        // result |= this == other; // |= means result = result || this == other
-        return result;
+
     }
 }
 
-class B extends A {
-    // @Override // called OverShadowing 
-    // public void method1() {
-    //     method1();
-    // }
+class C {
 
-    // public void method2() {
-    //     method1();
-    // }
-    @Override
-    public boolean equals(Object other) {
-        boolean result = super.equals(other); // 
-      
-        if (other instanceof B) { // if other is pointing at an Object of A
-            B b = (B)other;        
-            result = result && (this.x == b.x && this.y == b.y);
-            return true;                        
-        }
-
-        return result;
-    }
-    public int y;
 }
+
+interface I {
+    public void method1();
+    public void method2();
+}
+
+class P implements I { // put shared code block from class A and B into class P 
+    // design pattern : Object Composition
+    public void method1(){
+        // block of code 1
+    }
+    public void method2(){
+        // block of code 2
+    }
+}
+
+class A implements I {
+    private I parent;
+    public I getParent() {
+        return parent;
+    }
+    public void setParent(I parent) {
+        this.parent = parent;
+    }
+    // public A() {
+    //     parent = new P();
+    // }
+    public A() {
+        this(new P());
+    }
+    public A(I parent) {
+        this.parent = parent;
+    }
+    public void method1(){
+// eliminate block of code    
+parent.method1();
+// actual code is in parent
+}
+    public void method2(){
+// eliminate block of code    
+    parent.method2();
+
+}
+}
+
+class B implements I {
+    I parent;
+    // public B() {
+    //     parent = new P();
+    // }
+
+    public B(I parent) {
+        this.parent = parent;
+    }
+    public void method1(){
+        // eliminate block of code
+        parent.method1();
+    }
+    public void method2(){
+// eliminate block of code    
+        parent.method2();
+}
+}
+
+// class P {
+//     public void method1(){
+//         // block of code 1
+//     }
+//     public void method2(){
+//         // block of code 2
+//     }
+// }
+
+// class A extends P {
+//     public void method3(){
+//         // block of code 3
+//     }
+// }
+
+// class B extends P {
+//     @Override
+//     public void method1(){
+//         // bloc kfo code 4
+//     }
